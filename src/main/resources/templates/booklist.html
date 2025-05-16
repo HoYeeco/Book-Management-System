@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图书信息列表</title>
+    <link rel="stylesheet" th:href="@{css/style.css}">
+</head>
+<body>
+<h1>图书列表</h1><br><br>
+<a th:href="@{/addBook}">添加图书</a><br><br>
+<div>
+    <form action="/searchBooks" method="get">
+        图书名称：<input type="text" name="name">
+        图书类别：<input type="text" name="category">
+        图书作者：<input type="text" name="author">
+        <input type="submit" value="搜索">
+    </form>
+</div>
+<div>
+    <form id="searchForm" action="/searchBookByStr" method="POST">
+        模糊搜索：<input type="text" name="searchStr" id="searchStr">
+        <input type ="submit" value="模糊搜索">
+    </form>
+</div>
+<br><br>
+<table class="tablecss">
+    <tr>
+        <th>选择</th>
+        <th>编号</th>
+        <th>名称</th>
+        <th`>作者</th>
+        <th>价格</th>
+        <th>类别</th>
+        <th>ISBN</th>
+        <th>出版社</th>
+        <th>出版时间</th>
+        <th>发行数量</th>
+        <th>已售数量</th>
+        <th>图片</th>
+        <th>简介</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="book:${books}">
+        <td><input type ="checkbox" class="ids" th:value="${book.id}"></td>
+        <td th:text="${book.id}"></td>
+        <td>
+            <a th:href="@{'/book/'+${book.id}}">[[${book.name}]]</a>
+        </td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.price}"></td>
+        <td th:text="${book.category}"></td>
+        <td th:text="${book.ISBN}"></td>
+        <td th:text="${book.press}"></td>
+        <td th:text="${#dates.format(book.time,'YYYY-MM-dd')}"></td>
+        <td th:text="${book.pnum}"></td>
+        <td th:text="${book.sales}"></td>
+        <td th:text="${book.imgurl}"></td>
+        <td th:text="${book.description}"></td>
+        <td>
+            <a th:href="@{'/updateBook/'+${book.id}}">修改</a>
+            <a th:href="@{'/deleteBook/'+${book.id}}">删除</a>
+        </td>
+    </tr>
+</table>
+<input type="button" value="批量删除" onclick="dels()">
+<script src="js/jquery-3.1.0.min.js"></script>
+<script>
+    function dels(){
+        if(confirm("确定删除所选图书吗？")){
+            var ids="";
+            $(".ids").each(
+                function (i,e){
+                    if($(e).is(":checked")){
+                        var id=$(e).val();
+                        ids+=id+",";
+                    }
+                }
+            );
+            if(ids.length==0){
+                alert("未选择任何图书，请选择删除项！")
+            }else {
+                ids = ids.substr(0, ids.length - 1);
+                location.href = "deleteBooks?id=" + ids;
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: Book-Management-System
+  datasource:
+    username: root
+    password: 66776677
+    url: jdbc:mysql://127.0.0.1:3306/bookstore?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: HTML5
+    suffix: .html
+    prefix: classpath:/templates/
+
+mybatis:
+    type-aliases-package: github.hoyeeco.bookmanagementsystem.pojo
+    mapper-locations: classpath:mapper/*.xml
+    configuration:
+      map-underscore-to-camel-case: true
+
+pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+    params: count=countsql
+
+#logging:
+#  level:
+#    root: INFO
+#    org.springframework: DEBUG
+#    github.hoyeeco: TRACE
+#    github.hoyeeco.bookmanagementsystem.mapper: TRACE
+#    org.mybatis: DEBUG

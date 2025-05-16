@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加图书</title>
+</head>
+<body>
+<h1>添加图书</h1>
+<form th:action="@{/addBook}"  method="post">
+<table>
+    <tr>
+        <td>名称</td>
+        <td ><input type="text" name="name"></td>
+    </tr>
+    <tr>
+        <td>作者</td>
+        <td ><input type="text" name="author"></td>
+    </tr>
+    <tr>
+        <td>价格</td>
+        <td ><input type="text" name="price"></td>
+    </tr>
+    <tr>
+        <td>类别</td>
+        <td ><input type="text" name="category"></td>
+    </tr>
+    <tr>
+        <td>ISBN</td>
+        <td ><input type="text" name="ISBN"></td>
+    </tr>
+    <tr>
+        <td>出版社</td>
+        <td ><input type="text" name="press"></td>
+    </tr>
+    <tr>
+        <td>出版日期</td>
+        <td ><input type="date" name="time" ></td>
+    </tr>
+    <tr>
+        <td>发行数量</td>
+        <td ><input type="text" name="pnum"></td>
+    </tr>
+    <tr>
+        <td>已售数量</td>
+        <td ><input type="text" name="sales"></td>
+    </tr>
+    <tr>
+        <td>图片</td>
+        <td ><input type="text" name="imgurl"></td>
+    </tr>
+    <tr>
+        <td>简介</td>
+        <td ><input type="text" name="description"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="submit" value="添加"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

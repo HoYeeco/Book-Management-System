@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="github.hoyeeco.bookmanagementsystem.mapper.OrderMapper">
+<!--    多对多 嵌套查询-->
+    <select id="findOrderByProduct"  parameterType="Integer" resultMap="OrderWithProductResult">
+        select *
+        from t_order
+        where id = #{id}
+    </select>
+    <resultMap id="OrderWithProductResult" type="Order">
+        <id property="id" column="id"></id>
+        <result property="number" column="number"></result>
+        <collection property="productList" column="id" ofType="Product"
+                    select="github.hoyeeco.bookmanagementsystem.mapper.ProductMapper.findProductByOrderId">
+        </collection>
+    </resultMap>
+
+<!--    根据用户编号查询所有订单信息-->
+    <select id="findAllOrdersByUid" parameterType="Integer" resultMap="OrderWithProductResult">
+        select * from t_order where user_id=#{user_id}
+    </select>
+</mapper>

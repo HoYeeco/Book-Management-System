@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图书详情</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>编号</td>
+        <td th:text="${book.id}"></td>
+    </tr>
+    <tr>
+        <td>名称</td>
+        <td th:text="${book.name}"></td>
+    </tr>
+    <tr>
+        <td>作者</td>
+        <td th:text="${book.author}"></td>
+    </tr>
+    <tr>
+        <td>价格</td>
+        <td th:text="${book.price}"></td>
+    </tr>
+    <tr>
+        <td>类别</td>
+        <td th:text="${book.category}"></td>
+    </tr>
+    <tr>
+        <td>ISBN</td>
+        <td th:text="${book.ISBN}"></td>
+    </tr>
+    <tr>
+        <td>出版社</td>
+        <td th:text="${book.press}"></td>
+    </tr>
+    <tr>
+        <td>出版日期</td>
+        <td th:text="${#dates.format(book.time,'YYYY-MM-dd')}"></td>
+    </tr>
+    <tr>
+        <td>发行数量</td>
+        <td th:text="${book.pnum}"></td>
+    </tr>
+    <tr>
+        <td>已售数量</td>
+        <td th:text="${book.sales}"></td>
+    </tr>
+    <tr>
+        <td>图片</td>
+        <td th:text="${book.imgurl}"></td>
+    </tr>
+    <tr>
+        <td>简介</td>
+        <td th:text="${book.description}"></td>
+    </tr>
+</table>
+</body>
+</html>

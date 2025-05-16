@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="github.hoyeeco.bookmanagementsystem.mapper.UserMapper">
+<!--    <select id="findUserById" parameterType="Integer" resultMap="IdCardWithUserResult">-->
+<!--    select *-->
+<!--    from t_user-->
+<!--    where id = #{id}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash; 一对一关联映射 嵌套查询 需要多条sql&ndash;&gt;-->
+<!--    <resultMap id="IdCardWithUserResult" type="User">-->
+<!--        <id property="id" column="id"></id>-->
+<!--        <result property="name" column="name"></result>-->
+<!--        <result property="password" column="password"></result>-->
+<!--        <result property="email" column="email"></result>-->
+<!--        <result property="phone" column="phone"></result>-->
+<!--        <association property="card" column="card_id" javaType="IdCard"-->
+<!--                     select="github.hoyeeco.bookmanagementsystem.mapper.IdCardMapper.findIdCardById"></association>-->
+<!--    </resultMap>-->
+
+    <!--一对一关联映射查询 嵌套结果 只需要一条sql-->
+    <select id="findUserById" parameterType="Integer" resultMap="IdCardWithUserResult1">
+        select u.*,c.*
+            from t_user u, t_idcard c
+        where u.card_id = c.id and u.id = #{id}
+    </select>
+    <resultMap id="IdCardWithUserResult1" type="User">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="password" column="password"></result>
+        <result property="email" column="email"></result>
+        <result property="phone" column="phone"></result>
+        <association property="card" javaType="IdCard">
+           <!-- 映射IdCard的属性和列 -->
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+            <result property="sex" column="sex"></result>
+            <result property="address" column="address"></result>
+            <result property="code" column="code"></result>
+        </association>
+    </resultMap>
+
+<!--    一对多关联 嵌套结果-->
+    <select id="findUserByOrder" parameterType="Integer" resultMap="UserWithOrderResult" >
+        SELECT u.*,o.id as order_id,o.number
+        FROM t_user u,t_order o
+        where u.id=#{id} and u.id=o.user_id
+    </select>
+    <resultMap id="UserWithOrderResult" type="User">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="password" column="password"></result>
+        <result property="email" column="email"></result>
+        <result property="phone" column="phone"></result>
+        <collection property="orderList" ofType="Order">
+            <id property="id" column="order_id"></id>
+            <result property="number" column="number"></result>
+        </collection>
+    </resultMap>
+
+<!--    综合查询所有用户-->
+    <select id="findAllUsers" resultMap="UserWithOrderAndProductResult">
+        select * from t_user
+    </select>
+    <resultMap id="UserWithOrderAndProductResult" type="User">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="password" column="password"></result>
+        <result property="email" column="email"></result>
+        <result property="phone" column="phone"></result>
+        <collection property="orderList" ofType="Order" column="id"
+                    select="github.hoyeeco.bookmanagementsystem.mapper.OrderMapper.findAllOrdersByUid">
+
+        </collection>
+    </resultMap>
+</mapper>

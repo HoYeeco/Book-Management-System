@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改图书</title>
+</head>
+<body>
+<h1>修改图书</h1>
+<form th:action="@{/addBook}"  method="post">
+<table>
+    <tr>
+        <td>编号</td>
+        <td ><input type="text" name="id" th:value="${book.id}" readonly></td>
+    </tr>
+    <tr>
+        <td>名称</td>
+        <td ><input type="text" name="name" th:value="${book.name}"></td>
+    </tr>
+    <tr>
+        <td>作者</td>
+        <td ><input type="text" name="author" th:value="${book.author}"></td>
+    </tr>
+    <tr>
+        <td>价格</td>
+        <td ><input type="text" name="price" th:value="${book.price}"></td>
+    </tr>
+    <tr>
+        <td>类别</td>
+        <td ><input type="text" name="category" th:value="${book.category}"></td>
+    </tr>
+    <tr>
+        <td>ISBN</td>
+        <td ><input type="text" name="ISBN" th:value="${book.ISBN}"></td>
+    </tr>
+    <tr>
+        <td>出版社</td>
+        <td ><input type="text" name="press" th:value="${book.press}"></td>
+    </tr>
+    <tr>
+        <td>出版日期</td>
+        <td ><input type="date" name="time" th:value="${#dates.format(book.time,'YYYY-MM-dd')}"></td>
+    </tr>
+    <tr>
+        <td>发行数量</td>
+        <td ><input type="text" name="pnum" th:value="${book.pnum}"></td>
+    </tr>
+    <tr>
+        <td>已售数量</td>
+        <td ><input type="text" name="sales" th:value="${book.sales}"></td>
+    </tr>
+    <tr>
+        <td>图片</td>
+        <td ><input type="text" name="imgurl" th:value="${book.imgurl}"></td>
+    </tr>
+    <tr>
+        <td>简介</td>
+        <td ><input type="text" name="description" th:value="${book.description}"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="submit" value="提交修改"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

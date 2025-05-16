@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图书信息列表</title>
+</head>
+<body>
+<h1>图书列表</h1><br><br>
+<table>
+    <tr>
+    <td>编号</td>
+    <td>名称</td>
+    <td>作者</td>
+    <td>价格</td>
+    <td>类别</td>
+    <td>ISBN</td>
+    <td>出版社</td>
+    <td>出版时间</td>
+    <td>发行数量</td>
+    <td>已售数量</td>
+    <td>图片</td>
+    <td>简介</td>
+    </tr>
+    <tr th:each="book:${page.list}">
+    <td th:text="${book.id}"></td>
+    <td>
+        <a th:href="@{'/book/'+${book.id}}">[[${book.name}]]</a>
+    </td>
+    <td th:text="${book.author}"></td>
+    <td th:text="${book.price}"></td>
+    <td th:text="${book.category}"></td>
+    <td th:text="${book.ISBN}"></td>
+    <td th:text="${book.press}"></td>
+    <td th:text="${#dates.format(book.time,'YYYY-MM-dd')}"></td>
+    <td th:text="${book.pnum}"></td>
+    <td th:text="${book.sales}"></td>
+    <td th:text="${book.imgurl}"></td>
+    <td th:text="${book.description}"></td>
+    </tr>
+</table>
+<br>
+<div>
+    <a th:if="${not page.isFirstPage}" th:href="@{/bookPage(start=${page.pageNum-1})}">
+        上一页
+    </a>
+    &nbsp;&nbsp;总页数：<span th:text="${page.pages}"></span>&nbsp;
+    &nbsp;&nbsp;当前页：<span th:text="${page.pageNum}"></span>&nbsp;
+    &nbsp;&nbsp;总记录数：<span th:text="${page.total}"></span>&nbsp;
+    &nbsp;&nbsp;当前页记录数：<span th:text="${page.size}"></span>&nbsp;
+    &nbsp;&nbsp; <a th:if="${not page.isLastPage}" th:href="@{/bookPage(start=${page.pageNum+1})}">下一页</a>
+</div>
+</body>
+</html>

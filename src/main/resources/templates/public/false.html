@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>失败提示页面</title>
+</head>
+<body>
+<h1>操作失败</h1>
+<h1 th:text="'后台传回的消息是：' + ${msg}"></h1><br>
+<a href="/books">返回首页</a>
+</body>
+</html>
